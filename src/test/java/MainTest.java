@@ -10,6 +10,8 @@ class MainTest {
     private static Stream<Arguments> params() {
         return Stream.of(
                 Arguments.of(new int[]{1}, 0)
+                ,Arguments.of(new int[]{1,2}, 1)
+                //,Arguments.of(new int[]{2,1}, 0)
         );
     }
 

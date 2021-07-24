@@ -9,10 +9,10 @@ public class Main {
         if (start >= end) return 0;
 
         int maxProfit = 0;
-        for (int rightIndex = start; rightIndex <= end; rightIndex++) {
-            int profit = prices[rightIndex] - prices[start];
+        for (int separator = start; separator <= end; separator++) {
+            int profit = prices[separator] - prices[start];
             if(profit >= 0) {
-                profit += findMaxProfit(prices,rightIndex+1, end);
+                profit += findMaxProfit(prices,separator+1, end);
             }
             if(profit > maxProfit) {
                 maxProfit = profit;

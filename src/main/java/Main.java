@@ -6,11 +6,17 @@ public class Main {
     }
 
     private int findMaxProfit(int[] prices, int start, int end) {
+        if (start >= end) return 0;
+
         int maxProfit = 0;
-        for (int rightIndex = start +1; rightIndex <= end; rightIndex++) {
+        for (int rightIndex = start; rightIndex <= end; rightIndex++) {
             int profit = prices[rightIndex] - prices[start];
-            if(profit > maxProfit)
+            if(profit >= 0) {
+                profit += findMaxProfit(prices,rightIndex+1, end);
+            }
+            if(profit > maxProfit) {
                 maxProfit = profit;
+            }
         }
         return maxProfit;
     }

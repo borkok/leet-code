@@ -65,8 +65,9 @@ class SolutionTest {
     private static Stream<Arguments> intersect() {
         return Stream.of(
                 Arguments.of(new int[]{1}, new int[]{2}, new int[]{})
-                //,Arguments.of(new int[]{1,2,2,1}, new int[]{2,2}, new int[]{2,2})
-                //,Arguments.of(new int[]{4,9,5}, new int[]{9,4,9,8,4}, new int[]{4,9})
+                ,Arguments.of(new int[]{1}, new int[]{1}, new int[]{1})
+                ,Arguments.of(new int[]{1,2,2,1}, new int[]{2,2}, new int[]{2,2})
+                ,Arguments.of(new int[]{4,9,5}, new int[]{9,4,9,8,4}, new int[]{4,9})
         );
     }
 

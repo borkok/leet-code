@@ -1,4 +1,4 @@
-package rotateArray;
+package arrays;
 
 import java.util.HashSet;
 
@@ -28,5 +28,14 @@ public class Solution {
             if (!integers.add(nums[i])) return true;
         }
         return false;
+    }
+
+    public int singleNumber(int[] nums) {
+        //had to peek solution :(
+        int single = 0;
+        for (int i = 0; i < nums.length; i++) {
+            single ^= nums[i];
+        }
+        return single;
     }
 }

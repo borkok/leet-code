@@ -1,4 +1,4 @@
-package rotateArray;
+package arrays;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -40,5 +40,25 @@ class SolutionTest {
     @MethodSource("params4Contains")
     public void contains(int[] nums, boolean expected) {
         assertThat(new Solution().containsDuplicate(nums)).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> params4SingleNum() {
+        return Stream.of(
+                Arguments.of(new int[]{1}, 1)
+                ,Arguments.of(new int[]{1,1,2}, 2)
+                ,Arguments.of(new int[]{-1,-1,-2}, -2)
+                ,Arguments.of(new int[]{-1,-1,2}, 2)
+                ,Arguments.of(new int[]{1,1,2,2,-3}, -3)
+                ,Arguments.of(new int[]{1,2,3,1,2}, 3)
+                ,Arguments.of(new int[]{4,1,2,1,2}, 4)
+                ,Arguments.of(new int[]{5,5,3,3,2,1,1}, 2)
+                ,Arguments.of(new int[]{5,5,3,50,1,3,1}, 50)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("params4SingleNum")
+    public void singleNum(int[] nums, int expected) {
+        assertThat(new Solution().singleNumber(nums)).isEqualTo(expected);
     }
 }

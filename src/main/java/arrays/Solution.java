@@ -40,6 +40,10 @@ public class Solution {
     }
 
     public int[] plusOne(int[] digits) {
-        return digits;
+        int[] result = new int[digits.length];
+        for (int i = 0; i < digits.length; i++) {
+            result[i] = digits[i]+1;
+        }
+        return result;
     }
 }

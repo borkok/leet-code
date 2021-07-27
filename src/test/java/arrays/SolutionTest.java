@@ -66,6 +66,7 @@ class SolutionTest {
         return Stream.of(
                 Arguments.of(new int[]{1}, new int[]{2})
                 ,Arguments.of(new int[]{9}, new int[]{1,0})
+                ,Arguments.of(new int[]{2,4,9}, new int[]{2,5,0})
         );
     }
 

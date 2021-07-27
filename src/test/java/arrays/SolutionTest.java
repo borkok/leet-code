@@ -65,6 +65,7 @@ class SolutionTest {
     private static Stream<Arguments> plusOne() {
         return Stream.of(
                 Arguments.of(new int[]{1}, new int[]{2})
+                ,Arguments.of(new int[]{9}, new int[]{1,0})
         );
     }
 

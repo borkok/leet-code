@@ -40,9 +40,15 @@ public class Solution {
     }
 
     public int[] plusOne(int[] digits) {
-        int[] result = new int[digits.length];
+        String number = "";
         for (int i = 0; i < digits.length; i++) {
-            result[i] = digits[i]+1;
+            number += String.valueOf(digits[i]);
+        }
+        int numberPlusOne = Integer.parseInt(number) + 1;
+        String[] strings = String.valueOf(numberPlusOne).split("");
+        int[] result = new int[strings.length];
+        for (int i = 0; i < strings.length; i++) {
+            result[i] = Integer.parseInt(strings[i]);
         }
         return result;
     }

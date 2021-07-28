@@ -84,18 +84,19 @@ public class Solution {
         Note that you must do this in-place without making a copy of the array.
      */
     public void moveZeroes(int[] nums) {
-        if (nums.length > 1) {
-            int leftZero = -1;
-            for (int i = 0; i < nums.length; i++) {
-                if (nums[i] == 0) {
-                    if (leftZero < 0) {
-                        leftZero = i;
-                    }
-                } else if (leftZero >= 0) {
-                    nums[leftZero] = nums[i];
-                    nums[i] = 0;
-                    leftZero++;
+        if (nums.length <= 1) {
+            return;
+        }
+        int leftZero = -1;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 0) {
+                if (leftZero < 0) {
+                    leftZero = i;
                 }
+            } else if (leftZero >= 0) {
+                nums[leftZero] = nums[i];
+                nums[i] = 0;
+                leftZero++;
             }
         }
     }

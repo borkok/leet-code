@@ -78,4 +78,22 @@ class SolutionTest {
     public void plusOne(int[] nums, int[] expected) {
         assertThat(new Solution().plusOne(nums)).containsExactly(expected);
     }
+
+    /*
+        1 <= nums.length <= 104
+        -231 <= nums[i] <= 231 - 1
+    */
+    private static Stream<Arguments> moveZeroes() {
+        return Stream.of(
+                Arguments.of(new int[]{1}, new int[]{1})
+                ,Arguments.of(new int[]{0,1}, new int[]{1,0})
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("moveZeroes")
+    public void moveZeroes(int[] nums, int[] expected) {
+        new Solution().moveZeroes(nums);
+        assertThat(nums).containsExactly(expected);
+    }
 }

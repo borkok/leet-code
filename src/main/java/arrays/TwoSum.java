@@ -19,6 +19,12 @@ public class TwoSum {
         if (nums.length == 2) {
             return new int[] { 0, 1 };
         }
+        int left = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            if ((left + nums[i]) == target) {
+                return new int[] { 0, i };
+            }
+        }
         return new int[] { 0, nums.length-1 };
     }
 }

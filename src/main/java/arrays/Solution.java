@@ -81,17 +81,23 @@ public class Solution {
     /*
         1 <= nums.length <= 104
         -231 <= nums[i] <= 231 - 1
+        Note that you must do this in-place without making a copy of the array.
      */
     public void moveZeroes(int[] nums) {
         if (nums.length > 1 && hasAnyZero(nums)) {
-            int firstZero = -1;
-            for (int i = 0; i < nums.length; i++) {
+            int leftZero = -1;
+            int rightZero = -1;
+            for (int i = 0; i < nums.length || rightZero >= nums.length; i++) {
                 if (nums[i] == 0) {
-                    firstZero = i;
-                } else if (firstZero >= 0) {
-                    nums[firstZero] = nums[i];
+                    if (leftZero < 0) {
+                        leftZero = i;
+                    }
+                    rightZero = i;
+                } else if (leftZero >= 0) {
+                    nums[leftZero] = nums[i];
                     nums[i] = 0;
-                    firstZero = i;
+                    leftZero++;
+                    rightZero++;
                 }
             }
         }

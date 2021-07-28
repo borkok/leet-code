@@ -83,10 +83,17 @@ public class Solution {
         -231 <= nums[i] <= 231 - 1
      */
     public void moveZeroes(int[] nums) {
-        if (nums.length > 1) {
+        if (nums.length > 1 && hasAnyZero(nums)) {
             int num0 = nums[0];
             nums[0] = nums[1];
             nums[1] = num0;
         }
+    }
+
+    private boolean hasAnyZero(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 0) return true;
+        }
+        return false;
     }
 }

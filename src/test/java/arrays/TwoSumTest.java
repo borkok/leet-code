@@ -15,6 +15,7 @@ class TwoSumTest {
                 Arguments.of(new int[]{1,1}, 2, new int[]{0,1})
                 ,Arguments.of(new int[]{1,2,1}, 2, new int[]{0,2})
                 ,Arguments.of(new int[]{1,1,2}, 2, new int[]{0,1})
+                ,Arguments.of(new int[]{2,1,1}, 2, new int[]{2,1})
 /*
 Input: nums = [2,7,11,15], target = 9
 Output: [0,1]

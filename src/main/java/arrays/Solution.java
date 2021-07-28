@@ -84,29 +84,19 @@ public class Solution {
         Note that you must do this in-place without making a copy of the array.
      */
     public void moveZeroes(int[] nums) {
-        if (nums.length > 1 && hasAnyZero(nums)) {
+        if (nums.length > 1) {
             int leftZero = -1;
-            int rightZero = -1;
-            for (int i = 0; i < nums.length || rightZero >= nums.length; i++) {
+            for (int i = 0; i < nums.length; i++) {
                 if (nums[i] == 0) {
                     if (leftZero < 0) {
                         leftZero = i;
                     }
-                    rightZero = i;
                 } else if (leftZero >= 0) {
                     nums[leftZero] = nums[i];
                     nums[i] = 0;
                     leftZero++;
-                    rightZero++;
                 }
             }
         }
-    }
-
-    private boolean hasAnyZero(int[] nums) {
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] == 0) return true;
-        }
-        return false;
     }
 }

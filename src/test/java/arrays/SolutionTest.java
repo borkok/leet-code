@@ -92,6 +92,9 @@ class SolutionTest {
                 ,Arguments.of(new int[]{2,0,1,0}, new int[]{2,1,0,0})
                 ,Arguments.of(new int[]{0,2,0,1}, new int[]{2,1,0,0})
                 ,Arguments.of(new int[]{2,0,0,1}, new int[]{2,1,0,0})
+                ,Arguments.of(new int[]{0,0,0,-1,-2,3}, new int[]{-1,-2,3,0,0,0})
+                ,Arguments.of(new int[]{0,0,-1,0,-2,0,3,0}, new int[]{-1,-2,3,0,0,0,0,0})
+                ,Arguments.of(new int[]{0,0,-1,0,-2,0,0,0}, new int[]{-1,-2,0,0,0,0,0,0})
         );
     }
 

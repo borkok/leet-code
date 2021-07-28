@@ -22,10 +22,6 @@ import java.util.Optional;
  * Can you come up with an algorithm that is less than O(n2) time complexity?
  */
 public class TwoSum {
-    private static List<Integer> mergeLists(List<Integer> listA, List<Integer> listB) {
-        listA.addAll(listB);
-        return listA;
-    }
 
     public int[] twoSum(int[] nums, int target) {
         if (nums.length == 2) {
@@ -36,74 +32,58 @@ public class TwoSum {
         return result;
     }
 
-    // maxNumber 104 + 218 = 322 operations
-    // but more memory
+    //  10^4 + 10^4 = 2 * 10^4 operations
     private int[] linear(int[] nums, int target) {
-        // make hash map and find minNumber and maxNumber
+        // make hash map
         NumberIndices numberIndices = new NumberIndices(nums);
-        int min = numberIndices.minNumber();
-        int max = numberIndices.maxNumber();
 
-        // try all possible pair of integers that sum to target
-        for (int left = min; left < max; left++) {
+        for (int leftIndex = 0; leftIndex < nums.length; leftIndex++) {
+            int left = nums[leftIndex];
             int right = target - left;
-            Optional<Pair> indices = numberIndices.findIndicesOf(new Pair(left, right));
-            if (indices.isPresent()) {
-                return new int[] { indices.get().left, indices.get().right };
-            };
+            Optional<Integer> rightIndex = left == right ?
+                                           numberIndices.findSecondIndexOf(left) :
+                                           numberIndices.findIndexOf(right);
+            if (rightIndex.isPresent()) {
+                return new int[] { leftIndex, rightIndex.get() };
+            }
         }
         throw new IllegalArgumentException();
     }
 
     private static class NumberIndices {
         private final Map<Integer, List<Integer>> indexByNum;
-        private int min;
-        private int max;
 
         NumberIndices(int[] nums) {
             indexByNum = new HashMap<>();
-            min = 110;
-            max = -110;
             for (int i = 0; i < nums.length; i++) {
                 indexByNum.merge(nums[i],
                                  new LinkedList<>(Collections.singletonList(i)),
-                                 TwoSum::mergeLists);
-                min = Math.min(nums[i], min);
-                max = Math.max(nums[i], max);
+                                 this::mergeLists);
+
             }
         }
 
-        int minNumber() {
-            return min;
+        private List<Integer> mergeLists(List<Integer> listA, List<Integer> listB) {
+            listA.addAll(listB);
+            return listA;
         }
 
-        int maxNumber() {
-            return max;
+        Optional<Integer> findIndexOf(Integer number) {
+            if (indexByNum.containsKey(number)) {
+                return Optional.of(indexByNum.get(number).get(0));
+            }
+            return Optional.empty();
         }
 
-        Optional<Pair> findIndicesOf(Pair numbers) {
-            if (numbers.left == numbers.right) {
-                if (indexByNum.containsKey(numbers.left) && indexByNum.get(numbers.left).size() > 1) {
-                    return Optional.of(new Pair(indexByNum.get(numbers.left).get(0), indexByNum.get(numbers.left).get(1)));
-                }
-            } else if (indexByNum.containsKey(numbers.left) && indexByNum.containsKey(numbers.right)) {
-                return Optional.of(new Pair(indexByNum.get(numbers.left).get(0), indexByNum.get(numbers.right).get(0)));
+        Optional<Integer> findSecondIndexOf(Integer number) {
+            if (indexByNum.containsKey(number) && indexByNum.get(number).size() > 1) {
+                return Optional.of(indexByNum.get(number).get(1));
             }
             return Optional.empty();
         }
     }
 
-    private static class Pair {
-        int left;
-        int right;
-
-        public Pair(int left, int right) {
-            this.left = left;
-            this.right = right;
-        }
-    }
-
-    //n2/2 => maxNumber 104^2 / 2 = 5 000 operations
+    //n2/2 => maxNumber 10^4^2 / 2 = 10^8 / 2 = 5 * 10^7 operations
     private int[] quadratic(int[] nums, int target) {
         for (int left = 0; left < nums.length; left++) {
             for (int right = left + 1; right < nums.length; right++) {

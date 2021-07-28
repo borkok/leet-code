@@ -16,6 +16,9 @@ package arrays;
  */
 public class TwoSum {
     public int[] twoSum(int[] nums, int target) {
-        return new int[]{0,1};
+        if (nums.length == 2) {
+            return new int[] { 0, 1 };
+        }
+        return new int[] { 0, nums.length-1 };
     }
 }

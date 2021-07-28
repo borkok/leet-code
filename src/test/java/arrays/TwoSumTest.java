@@ -13,6 +13,7 @@ class TwoSumTest {
     private static Stream<Arguments> twoSum() {
         return Stream.of(
                 Arguments.of(new int[]{1,1}, 2, new int[]{0,1})
+                ,Arguments.of(new int[]{1,2,1}, 2, new int[]{0,2})
 /*
 Input: nums = [2,7,11,15], target = 9
 Output: [0,1]

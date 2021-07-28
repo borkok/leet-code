@@ -18,6 +18,8 @@ class TwoSumTest {
                 ,Arguments.of(new int[]{2,1,1}, 2, new int[]{2,1})
                 ,Arguments.of(new int[]{11,2,15,7}, 9, new int[]{1,3})
                 ,Arguments.of(new int[]{2,7,11,15}, 9, new int[]{0,1})
+                ,Arguments.of(new int[]{2,108,-106,15}, 2, new int[]{1,2})
+                ,Arguments.of(new int[]{2,-108,106,15}, -2, new int[]{1,2})
         );
     }
 

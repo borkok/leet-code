@@ -84,9 +84,16 @@ public class Solution {
      */
     public void moveZeroes(int[] nums) {
         if (nums.length > 1 && hasAnyZero(nums)) {
-            int num0 = nums[0];
-            nums[0] = nums[1];
-            nums[1] = num0;
+            int firstZero = -1;
+            for (int i = 0; i < nums.length; i++) {
+                if (nums[i] == 0) {
+                    firstZero = i;
+                } else if (firstZero >= 0) {
+                    nums[firstZero] = nums[i];
+                    nums[i] = 0;
+                    firstZero = i;
+                }
+            }
         }
     }
 

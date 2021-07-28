@@ -88,6 +88,7 @@ class SolutionTest {
                 Arguments.of(new int[]{1}, new int[]{1})
                 ,Arguments.of(new int[]{0,1}, new int[]{1,0})
                 ,Arguments.of(new int[]{2,1}, new int[]{2,1})
+                ,Arguments.of(new int[]{2,0,1}, new int[]{2,1,0})
         );
     }
 

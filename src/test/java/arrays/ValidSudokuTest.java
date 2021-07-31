@@ -12,6 +12,11 @@ class ValidSudokuTest {
     private static Stream<Arguments> isValidSudoku() {
         return Stream.of(
                 Arguments.of(SudokuBuilder.emptyBoard(), true)
+                , Arguments.of(
+                        SudokuBuilder.withFilledCells(
+                                SudokuCellBuilder.aCell().row(0).col(0).digit('1').build(),
+                                SudokuCellBuilder.aCell().row(0).col(1).digit('1').build()
+                        ).build(), false)
         );
     }
 

@@ -4,7 +4,9 @@
 
 package arrays;
 
-public class SudokuBuilder {
+class SudokuBuilder {
+    private final SudokuCell[] cells;
+
     static char[][] emptyBoard() {
         char[][] chars = new char[9][9];
         for (int i = 0; i < 9; i++) {
@@ -13,5 +15,21 @@ public class SudokuBuilder {
             }
         }
         return chars;
+    }
+
+    static SudokuBuilder withFilledCells(SudokuCell... cells) {
+        return new SudokuBuilder(cells);
+    }
+
+    SudokuBuilder(SudokuCell[] cells) {
+        this.cells = cells;
+    }
+
+    public char[][] build() {
+        char[][] board = emptyBoard();
+        for (SudokuCell cell : cells) {
+            board[cell.getRow()][cell.getCol()] = cell.getDigit();
+        }
+        return board;
     }
 }

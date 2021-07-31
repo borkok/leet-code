@@ -1,5 +1,10 @@
 package arrays;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+
 /*
 Determine if a 9 x 9 Sudoku board is valid.
 Only the filled cells need to be validated according to the following rules:
@@ -23,16 +28,28 @@ public class ValidSudoku {
 
     public boolean isValidSudoku(char[][] board) {
         this.board = board;
-        if (isEmpty()) return true;
-        return false;
+        return allRowsAreValid();// && allColsAreValid() && allBoxesAreValid();
     }
 
-    private boolean isEmpty() {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                if (board[i][j] != '.') return false;
-            }
+    private boolean allRowsAreValid() {
+        for (int rowIndex = 0; rowIndex < 9; rowIndex++) {
+            if (!sudokuPartitionIsValid(board[rowIndex])) return false;
         }
         return true;
+    }
+
+    private boolean sudokuPartitionIsValid(char[] chars) {
+        List<Character> digitsList = retrieveDigitsOnly(chars);
+        if (digitsList.isEmpty()) return true;
+        Set<Character> uniqueDigits = new HashSet<>(digitsList);
+        return uniqueDigits.size() == digitsList.size();
+    }
+
+    private List<Character> retrieveDigitsOnly(char[] chars) {
+        List<Character> digits = new LinkedList<>();
+        for (int i = 0; i < 9; i++) {
+            if (chars[i] != '.') digits.add(chars[i]);
+        }
+        return digits;
     }
 }

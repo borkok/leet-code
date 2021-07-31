@@ -28,7 +28,7 @@ public class ValidSudoku {
 
     public boolean isValidSudoku(char[][] board) {
         this.board = board;
-        return allRowsAreValid();// && allColsAreValid() && allBoxesAreValid();
+        return allRowsAreValid() && allColsAreValid();// && allBoxesAreValid();
     }
 
     private boolean allRowsAreValid() {
@@ -36,6 +36,24 @@ public class ValidSudoku {
             if (!sudokuPartitionIsValid(board[rowIndex])) return false;
         }
         return true;
+    }
+
+    private boolean allColsAreValid() {
+        char[][] transposedBoard = getTransposedBoard();
+        for (int colIndex = 0; colIndex < 9; colIndex++) {
+            if (!sudokuPartitionIsValid(transposedBoard[colIndex])) return false;
+        }
+        return true;
+    }
+
+    private char[][] getTransposedBoard() {
+        char[][] transposedBoard = new char[9][9];
+        for (int colIndex = 0; colIndex < 9; colIndex++) {
+            for (int rowIndex = 0; rowIndex < 9; rowIndex++) {
+                transposedBoard[colIndex][rowIndex] = board[rowIndex][colIndex];
+            }
+        }
+        return transposedBoard;
     }
 
     private boolean sudokuPartitionIsValid(char[] chars) {

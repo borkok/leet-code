@@ -33,7 +33,7 @@ public class ValidSudoku {
 
     private boolean allRowsAreValid() {
         for (int rowIndex = 0; rowIndex < 9; rowIndex++) {
-            if (!sudokuPartitionIsValid(board[rowIndex])) return false;
+            if (sudokuPartitionIsInvalid(board[rowIndex])) return false;
         }
         return true;
     }
@@ -41,7 +41,7 @@ public class ValidSudoku {
     private boolean allColsAreValid() {
         char[][] transposedBoard = getTransposedBoard();
         for (int colIndex = 0; colIndex < 9; colIndex++) {
-            if (!sudokuPartitionIsValid(transposedBoard[colIndex])) return false;
+            if (sudokuPartitionIsInvalid(transposedBoard[colIndex])) return false;
         }
         return true;
     }
@@ -56,11 +56,9 @@ public class ValidSudoku {
         return transposedBoard;
     }
 
-    private boolean sudokuPartitionIsValid(char[] chars) {
+    private boolean sudokuPartitionIsInvalid(char[] chars) {
         List<Character> digitsList = retrieveDigitsOnly(chars);
-        if (digitsList.isEmpty()) return true;
-        Set<Character> uniqueDigits = new HashSet<>(digitsList);
-        return uniqueDigits.size() == digitsList.size();
+        return new SudokuPartition(digitsList).isInvalid();
     }
 
     private List<Character> retrieveDigitsOnly(char[] chars) {
@@ -69,5 +67,19 @@ public class ValidSudoku {
             if (chars[i] != '.') digits.add(chars[i]);
         }
         return digits;
+    }
+
+    private static class SudokuPartition {
+        private final List<Character> digits;
+
+        public SudokuPartition(List<Character> digits) {
+            this.digits = digits;
+        }
+
+        private boolean isInvalid() {
+            if (digits.isEmpty()) return false;
+            Set<Character> uniqueDigits = new HashSet<>(digits);
+            return uniqueDigits.size() != digits.size();
+        }
     }
 }

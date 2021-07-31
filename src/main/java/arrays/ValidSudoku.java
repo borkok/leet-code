@@ -20,6 +20,16 @@ board[i][j] is a digit or '.'.
  */
 public class ValidSudoku {
     public boolean isValidSudoku(char[][] board) {
+        if (isEmpty(board)) return true;
+        return false;
+    }
+
+    private boolean isEmpty(char[][] board) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (board[i][j] != '.') return false;
+            }
+        }
         return true;
     }
 }

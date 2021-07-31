@@ -28,6 +28,18 @@ class ValidSudokuTest {
                                 SudokuCellBuilder.aCell().row(0).col(1).digit('2').build(),
                                 SudokuCellBuilder.aCell().row(1).col(0).digit('1').build()
                         ).build(), false)
+                , Arguments.of(
+                        SudokuBuilder.withFilledCells(
+                                SudokuCellBuilder.aCell().row(0).col(0).digit('1').build(),
+                                SudokuCellBuilder.aCell().row(0).col(1).digit('2').build(),
+                                SudokuCellBuilder.aCell().row(1).col(0).digit('3').build()
+                        ).build(), true)
+                , Arguments.of(
+                        SudokuBuilder.withFilledCells(
+                                SudokuCellBuilder.aCell().row(0).col(0).digit('1').build(),
+                                SudokuCellBuilder.aCell().row(0).col(1).digit('2').build(),
+                                SudokuCellBuilder.aCell().row(1).col(0).digit('2').build()
+                        ).build(), false)
         );
     }
 

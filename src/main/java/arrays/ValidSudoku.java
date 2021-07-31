@@ -19,12 +19,15 @@ board[i].length == 9
 board[i][j] is a digit or '.'.
  */
 public class ValidSudoku {
+    private char[][] board;
+
     public boolean isValidSudoku(char[][] board) {
-        if (isEmpty(board)) return true;
+        this.board = board;
+        if (isEmpty()) return true;
         return false;
     }
 
-    private boolean isEmpty(char[][] board) {
+    private boolean isEmpty() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (board[i][j] != '.') return false;

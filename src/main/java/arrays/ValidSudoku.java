@@ -40,14 +40,22 @@ public class ValidSudoku {
             for (int rowIndex = 0; rowIndex < 9; rowIndex++) {
                 for (int colIndex = 0; colIndex < 9; colIndex++) {
                     char c = board[rowIndex][colIndex];
-                    if (c != '.') {
-                        rows.get(rowIndex).add(c);
-                        cols.get(colIndex).add(c);
-                        int boxIndex = rowIndex / 3 + colIndex / 3;
-                        boxes.get(boxIndex).add(c);
+                    if (isDigit(c)) {
+                        addDigit(rowIndex, colIndex, c);
                     }
                 }
             }
+        }
+
+        private void addDigit(int rowIndex, int colIndex, char digit) {
+            rows.get(rowIndex).add(digit);
+            cols.get(colIndex).add(digit);
+            int boxIndex = rowIndex / 3 + colIndex / 3;
+            boxes.get(boxIndex).add(digit);
+        }
+
+        private boolean isDigit(char c) {
+            return c != '.';
         }
 
         private void initialize() {

@@ -40,7 +40,7 @@ class ValidSudokuTest {
                                 SudokuCellBuilder.aCell().row(0).col(1).digit('2').build(),
                                 SudokuCellBuilder.aCell().row(1).col(0).digit('2').build()
                         ).build(), false)
-/*                , Arguments.of(
+                , Arguments.of(
                         new char[][] {
                                   { '5', '3', '.', '.', '7', '.', '.', '.', '.' }
                                 , { '6', '.', '.', '1', '9', '5', '.', '.', '.' }
@@ -52,7 +52,7 @@ class ValidSudokuTest {
                                 , { '.', '.', '.', '4', '1', '9', '.', '.', '5' }
                                 , { '.', '.', '.', '.', '8', '.', '.', '7', '9' }
                         }, true
-                )*/
+                )
         );
     }
 

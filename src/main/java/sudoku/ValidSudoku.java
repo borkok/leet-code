@@ -20,9 +20,32 @@ board[i][j] is a digit or '.'.
  */
 public class ValidSudoku {
 
+    private final SudokuRows rows = new SudokuRows();
+    private final SudokuColumns cols = new SudokuColumns();
+    private final SudokuBoxes boxes = new SudokuBoxes();
+
     public boolean isValidSudoku(char[][] board) {
-        Sudoku sudoku = new Sudoku(board);
-        return sudoku.allRowsAreValid() && sudoku.allColsAreValid() && sudoku.allBoxesAreValid();
+        putDigits(board);
+        return rows.allAreValid()
+                && cols.allAreValid()
+                && boxes.allAreValid();
+    }
+
+    private void putDigits(char[][] board) {
+        for (int rowIndex = 0; rowIndex < 9; rowIndex++) {
+            for (int colIndex = 0; colIndex < 9; colIndex++) {
+                char c = board[rowIndex][colIndex];
+                if (isDigit(c)) {
+                    rows.putDigit(rowIndex, colIndex, c);
+                    cols.putDigit(rowIndex, colIndex, c);
+                    boxes.putDigit(rowIndex, colIndex, c);
+                }
+            }
+        }
+    }
+
+    private boolean isDigit(char c) {
+        return c != '.';
     }
 
 }

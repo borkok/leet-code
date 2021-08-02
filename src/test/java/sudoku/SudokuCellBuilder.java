@@ -1,4 +1,4 @@
-package arrays;
+package sudoku;
 
 class SudokuCellBuilder {
     private int row;

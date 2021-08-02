@@ -2,7 +2,7 @@
  * Copyright (c) 2021. BEST S.A. and/or its affiliates. All rights reserved.
  */
 
-package arrays;
+package sudoku;
 
 class SudokuBuilder {
     private final SudokuCell[] cells;

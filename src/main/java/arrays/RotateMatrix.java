@@ -20,22 +20,24 @@ public class RotateMatrix {
             return;
         }
         Matrix theMatrix = new Matrix(matrix);
-        int temp = theMatrix.get(0);
-        theMatrix.set(0, theMatrix.get(1));
-        theMatrix.set(1, theMatrix.get(2));
-        theMatrix.set(2, theMatrix.get(3));
-        theMatrix.set(3, temp);
+
+        int perimeter = theMatrix.getPerimeter(matrix);
+        int first = theMatrix.get(0);
+        for (int i = 0; i < perimeter-1; i++) {
+            theMatrix.set(i, theMatrix.get(i+1));
+        }
+        theMatrix.set(perimeter-1, first);
     }
 
     private static class Matrix {
-        private int[][] matrix;
+        private final int[][] matrix;
 
         Matrix(int[][] matrix) {
             this.matrix = matrix;
         }
 
         /**
-         * Counter-clockwise index of outer layer.
+         * Counter-clockwise index of perimeter cells.
          * For example for 2x2 matrix
          * 0,0 => index=0
          * 1,0 => index=1
@@ -71,6 +73,10 @@ public class RotateMatrix {
                 default:
                     return;
             }
+        }
+
+        private int getPerimeter(int[][] matrix) {
+            return 4 * (matrix.length - 1);
         }
     }
 }

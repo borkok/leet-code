@@ -16,24 +16,28 @@ matrix[i].length == n
  */
 public class RotateMatrix {
     public void rotate(int[][] matrix) {
-        if (matrix.length == 1) {
-            return;
-        }
         Matrix theMatrix = new Matrix(matrix);
-
-        int perimeter = theMatrix.getPerimeter(matrix);
-        int first = theMatrix.get(0);
-        for (int i = 0; i < perimeter-1; i++) {
-            theMatrix.set(i, theMatrix.get(i+1));
+        for (int i = 0; i < matrix.length-1; i++) {
+            theMatrix.rotateByOneCell();
         }
-        theMatrix.set(perimeter-1, first);
     }
 
     private static class Matrix {
         private final int[][] matrix;
+        private final int N;
 
         Matrix(int[][] matrix) {
             this.matrix = matrix;
+            this.N = matrix.length;
+        }
+
+        void rotateByOneCell() {
+            int perimeter = getPerimeter();
+            int first = get(0);
+            for (int i = 0; i < perimeter - 1; i++) {
+                set(i, get(i + 1));
+            }
+            set(perimeter - 1, first);
         }
 
         /**
@@ -44,38 +48,31 @@ public class RotateMatrix {
          * 1,1 => index=2
          * 0,1 => index=3
          */
+        private int get(int index) {
+            int dim = N - 1;
+            if (index < dim)
+                return matrix[index][0];
+            if (index < 2 * dim)
+                return matrix[dim][index - dim];
+            if (index < 3 * dim)
+                return matrix[3 * dim - index][dim];
+            return matrix[0][4 * dim - index];
+        }
 
-        int get(int index) {
-            switch (index) {
-                case 0:
-                    return matrix[0][0];
-                case 1:
-                    return matrix[1][0];
-                case 2:
-                    return matrix[1][1];
-                case 3:
-                    return matrix[0][1];
-                default:
-                    return 99999;
+        private void set(int index, int value) {
+            int dim = N - 1;
+            if (index < dim) {
+                matrix[index][0] = value;
+            } else if (index < 2 * dim) {
+                matrix[dim][index - dim] = value;
+            } else if (index < 3 * dim) {
+                matrix[3 * dim - index][dim] = value;
+            } else {
+                matrix[0][4 * dim - index] = value;
             }
         }
 
-        void set(int index, int value) {
-            switch (index) {
-                case 0:
-                    matrix[0][0] = value; return;
-                case 1:
-                    matrix[1][0] = value; return;
-                case 2:
-                    matrix[1][1] = value; return;
-                case 3:
-                    matrix[0][1] = value; return;
-                default:
-                    return;
-            }
-        }
-
-        private int getPerimeter(int[][] matrix) {
+        private int getPerimeter() {
             return 4 * (matrix.length - 1);
         }
     }

@@ -19,14 +19,10 @@ public class RotateMatrix {
         if (matrix.length == 1) {
             return;
         }
-        int temp1, temp2;
-        temp1 = matrix[0][0];
+        int temp = matrix[0][0];
         matrix[0][0] = matrix[1][0];
-        temp2 = matrix[0][1];
-        matrix[0][1] = temp1;
-        temp1 = matrix[1][1];
-        matrix[1][1] = temp2;
-        temp2 = matrix[1][0];
-        matrix[1][0] = temp1;
+        matrix[1][0] = matrix[1][1];
+        matrix[1][1] = matrix[0][1];
+        matrix[0][1] = temp;
     }
 }

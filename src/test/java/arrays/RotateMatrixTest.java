@@ -14,6 +14,8 @@ class RotateMatrixTest {
                 //1x1
                 Arguments.of(new int[][]{{1}}, new int[][]{{1}})
                 ,Arguments.of(new int[][]{{1,2},{3,4}}, new int[][]{{3,1},{4,2}})
+/*                ,Arguments.of(new int[][]{{1,2,3},{4,5,6},{7,8,9}},
+                              new int[][]{{7,4,1},{8,5,2},{9,6,3}})*/
          );
     }
 

@@ -13,6 +13,7 @@ class RotateMatrixTest {
         return Stream.of(
                 //1x1
                 Arguments.of(new int[][]{{1}}, new int[][]{{1}})
+                ,Arguments.of(new int[][]{{1,2},{3,4}}, new int[][]{{3,1},{4,2}})
          );
     }
 

@@ -16,7 +16,7 @@ matrix[i].length == n
  */
 public class RotateMatrix {
     public void rotate(int[][] matrix) {
-        Matrix theMatrix = new Matrix(matrix);
+        Matrix theMatrix = new Matrix(matrix, matrix.length);
         for (int i = 0; i < matrix.length-1; i++) {
             theMatrix.rotateByOneCell();
         }
@@ -32,9 +32,9 @@ public class RotateMatrix {
         private final int[][] matrix;
         private final int N;
 
-        Matrix(int[][] matrix) {
+        Matrix(int[][] matrix, int length) {
             this.matrix = matrix;
-            this.N = matrix.length;
+            this.N = length;
         }
 
         void rotateByOneCell() {

@@ -24,12 +24,6 @@ public class RotateMatrix {
         }
     }
 
-    /*
-    * NOW - ADD RECURRENCE
-    * from outer to most inner layer
-    * without copying matrix
-    * instead of 0,0 -> 4,4 => 1,1 -> 3,3
-    * */
     private static class Matrix {
         private final int[][] matrix;
         private final int N;
@@ -68,21 +62,25 @@ public class RotateMatrix {
          * 0,1 => index=3
          */
         private int get(int index) {
-            RowCol coords = convert(index);
+            RowCol coords = convertTo2D(index);
             return matrix[coords.row][coords.col];
         }
 
         private void set(int index, int value) {
-            RowCol coords = convert(index);
+            RowCol coords = convertTo2D(index);
             matrix[coords.row][coords.col] = value;
         }
 
-        private RowCol convert(int index) {
+        private RowCol convertTo2D(int index) {
+            return convertTo2DAbsolute(index).alignToTopLeft(topLeft);
+        }
+
+        private RowCol convertTo2DAbsolute(int index) {
             int dim = N - 1;
-            if (index < dim)                return new RowCol(topLeft.row + index, topLeft.col);
-            if (index < 2 * dim)            return new RowCol(topLeft.row + dim, topLeft.col + index - dim);
-            if (index < 3 * dim)            return new RowCol(topLeft.row + 3 * dim - index, topLeft.col + dim);
-            return new RowCol(topLeft.row, topLeft.col + 4 * dim - index);
+            if (index < dim)                return new RowCol(index, 0);
+            if (index < 2 * dim)            return new RowCol(dim, index - dim);
+            if (index < 3 * dim)            return new RowCol(3 * dim - index, dim);
+            return new RowCol(0, 4 * dim - index);
         }
     }
 
@@ -90,9 +88,15 @@ public class RotateMatrix {
         int row;
         int col;
 
-        public RowCol(int row, int col) {
+        RowCol(int row, int col) {
             this.row = row;
             this.col = col;
+        }
+
+        RowCol alignToTopLeft(RowCol topLeft) {
+            this.row = topLeft.row + row;
+            this.col = topLeft.col + col;
+            return this;
         }
     }
 }

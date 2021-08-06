@@ -17,9 +17,7 @@ matrix[i].length == n
 public class RotateMatrix {
     public void rotate(int[][] matrix) {
         Matrix theMatrix = new Matrix(matrix, matrix.length);
-        for (int i = 0; i < matrix.length-1; i++) {
-            theMatrix.rotateByOneCell();
-        }
+        theMatrix.rotateOuterLayer();
     }
 
     /*
@@ -32,25 +30,29 @@ public class RotateMatrix {
         private final int[][] matrix;
         private final int N;
         private final RowCol topLeft;
+        private final int perimeter;
 
         Matrix(int[][] matrix, int length) {
             this.matrix = matrix;
             this.N = length;
+            this.perimeter = 4 * (N - 1);
+
             int diff = (matrix.length - N) / 2;
             topLeft = new RowCol(diff, diff);
         }
 
-        void rotateByOneCell() {
-            int perimeter = getPerimeter();
+        void rotateOuterLayer() {
+            for (int i = 0; i < N-1; i++) {
+                rotateByOneCell();
+            }
+        }
+
+        private void rotateByOneCell() {
             int first = get(0);
             for (int i = 0; i < perimeter - 1; i++) {
                 set(i, get(i + 1));
             }
             set(perimeter - 1, first);
-        }
-
-        private int getPerimeter() {
-            return 4 * (matrix.length - 1);
         }
 
         /**

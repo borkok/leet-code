@@ -22,6 +22,12 @@ public class RotateMatrix {
         }
     }
 
+    /*
+    * NOW - ADD RECURRENCE
+    * from outer to most inner layer
+    * without copying matrix
+    * instead of 0,0 -> 4,4 => 1,1 -> 3,3
+    * */
     private static class Matrix {
         private final int[][] matrix;
         private final int N;
@@ -40,6 +46,10 @@ public class RotateMatrix {
             set(perimeter - 1, first);
         }
 
+        private int getPerimeter() {
+            return 4 * (matrix.length - 1);
+        }
+
         /**
          * Counter-clockwise index of perimeter cells.
          * For example for 2x2 matrix
@@ -49,31 +59,31 @@ public class RotateMatrix {
          * 0,1 => index=3
          */
         private int get(int index) {
-            int dim = N - 1;
-            if (index < dim)
-                return matrix[index][0];
-            if (index < 2 * dim)
-                return matrix[dim][index - dim];
-            if (index < 3 * dim)
-                return matrix[3 * dim - index][dim];
-            return matrix[0][4 * dim - index];
+            RowCol coords = convert(index);
+            return matrix[coords.row][coords.col];
         }
 
         private void set(int index, int value) {
-            int dim = N - 1;
-            if (index < dim) {
-                matrix[index][0] = value;
-            } else if (index < 2 * dim) {
-                matrix[dim][index - dim] = value;
-            } else if (index < 3 * dim) {
-                matrix[3 * dim - index][dim] = value;
-            } else {
-                matrix[0][4 * dim - index] = value;
-            }
+            RowCol coords = convert(index);
+            matrix[coords.row][coords.col] = value;
         }
 
-        private int getPerimeter() {
-            return 4 * (matrix.length - 1);
+        private RowCol convert(int index) {
+            int dim = N - 1;
+            if (index < dim)                return new RowCol(index, 0);
+            if (index < 2 * dim)            return new RowCol(dim, index - dim);
+            if (index < 3 * dim)            return new RowCol(3 * dim - index, dim);
+            return new RowCol(0, 4 * dim - index);
+        }
+    }
+
+    private static class RowCol {
+        int row;
+        int col;
+
+        public RowCol(int row, int col) {
+            this.row = row;
+            this.col = col;
         }
     }
 }

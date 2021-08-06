@@ -31,10 +31,13 @@ public class RotateMatrix {
     private static class Matrix {
         private final int[][] matrix;
         private final int N;
+        private final RowCol topLeft;
 
         Matrix(int[][] matrix, int length) {
             this.matrix = matrix;
             this.N = length;
+            int diff = (matrix.length - N) / 2;
+            topLeft = new RowCol(diff, diff);
         }
 
         void rotateByOneCell() {
@@ -70,10 +73,10 @@ public class RotateMatrix {
 
         private RowCol convert(int index) {
             int dim = N - 1;
-            if (index < dim)                return new RowCol(index, 0);
+            if (index < dim)                return new RowCol(index, topLeft.col);
             if (index < 2 * dim)            return new RowCol(dim, index - dim);
             if (index < 3 * dim)            return new RowCol(3 * dim - index, dim);
-            return new RowCol(0, 4 * dim - index);
+            return new RowCol(topLeft.row, 4 * dim - index);
         }
     }
 

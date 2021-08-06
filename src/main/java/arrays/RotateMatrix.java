@@ -16,8 +16,12 @@ matrix[i].length == n
  */
 public class RotateMatrix {
     public void rotate(int[][] matrix) {
-        Matrix theMatrix = new Matrix(matrix, matrix.length);
-        theMatrix.rotateOuterLayer();
+        int length = matrix.length;
+        while (length > 1) {
+            Matrix theMatrix = new Matrix(matrix, length);
+            theMatrix.rotateOuterLayer();
+            length = length - 2;
+        }
     }
 
     /*
@@ -48,7 +52,7 @@ public class RotateMatrix {
         }
 
         private void rotateByOneCell() {
-            int first = get(0);
+            int first = matrix[topLeft.row][topLeft.col];
             for (int i = 0; i < perimeter - 1; i++) {
                 set(i, get(i + 1));
             }
@@ -75,10 +79,10 @@ public class RotateMatrix {
 
         private RowCol convert(int index) {
             int dim = N - 1;
-            if (index < dim)                return new RowCol(index, topLeft.col);
-            if (index < 2 * dim)            return new RowCol(dim, index - dim);
-            if (index < 3 * dim)            return new RowCol(3 * dim - index, dim);
-            return new RowCol(topLeft.row, 4 * dim - index);
+            if (index < dim)                return new RowCol(topLeft.row + index, topLeft.col);
+            if (index < 2 * dim)            return new RowCol(topLeft.row + dim, topLeft.col + index - dim);
+            if (index < 3 * dim)            return new RowCol(topLeft.row + 3 * dim - index, topLeft.col + dim);
+            return new RowCol(topLeft.row, topLeft.col + 4 * dim - index);
         }
     }
 

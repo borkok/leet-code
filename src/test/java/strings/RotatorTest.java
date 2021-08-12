@@ -12,7 +12,8 @@ class RotatorTest {
     private static Stream<Arguments> params() {
         return Stream.of(
                 Arguments.of(new char[]{'a'}, new char[]{'a'}),
-                Arguments.of(new char[]{'a','b'}, new char[]{'b','a'})
+                Arguments.of(new char[]{'a','b'}, new char[]{'b','a'}),
+                Arguments.of(new char[]{'a','b','c'}, new char[]{'c','b','a'})
         );
     }
 

@@ -13,7 +13,8 @@ class RotatorTest {
         return Stream.of(
                 Arguments.of(new char[]{'a'}, new char[]{'a'}),
                 Arguments.of(new char[]{'a','b'}, new char[]{'b','a'}),
-                Arguments.of(new char[]{'a','b','c'}, new char[]{'c','b','a'})
+                Arguments.of(new char[]{'a','b','c'}, new char[]{'c','b','a'}),
+                Arguments.of(new char[]{'h','e','l','l','o'}, new char[]{'o','l','l','e','h'})
         );
     }
 

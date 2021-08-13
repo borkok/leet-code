@@ -6,6 +6,6 @@ outside the signed 32-bit integer range [-2^31, 2^31 - 1], then return 0.
  */
 public class ReverseInteger {
     public int reverse(int x) {
-        return 1;
+        return x;
     }
 }

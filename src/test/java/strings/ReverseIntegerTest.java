@@ -13,6 +13,7 @@ class ReverseIntegerTest {
     private static Stream<Arguments> params() {
         return Stream.of(
                 Arguments.of(1, 1)
+                ,Arguments.of(2, 2)
         );
     }
 

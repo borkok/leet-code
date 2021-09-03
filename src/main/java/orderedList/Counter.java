@@ -1,15 +1,40 @@
 package orderedList;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Counter {
+    private List<Integer> counters = new LinkedList<>();
     private int counter1 = 0;
     private int counter2 = 0;
 
-    String getNextNumber(int i) {
-        if (i == 2)  return concatWithDot(String.valueOf(counter1), String.valueOf(++counter2));
-        return String.valueOf(++counter1);
+    String getNextNumber(int level) {
+        trimRight(level);
+        increaseCounter(level);
+        return concatWithDot();
     }
 
-    String concatWithDot(String... numbers) {
-        return String.join(".",numbers);
+    private void trimRight(int newSize) {
+        for (int index = counters.size()-1; index > newSize-1; index--) {
+            counters.remove(index);
+        }
+    }
+
+    private void increaseCounter(int level) {
+        if (counters.size() < level) {
+            while (counters.size() < level) {
+                counters.add(1);
+            }
+        } else {
+            int newValue = counters.get(level - 1) + 1;
+            counters.set(level - 1, newValue);
+        }
+    }
+
+    String concatWithDot() {
+        return counters.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining("."));
     }
 }

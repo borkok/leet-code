@@ -19,6 +19,30 @@ class OrderedListTest {
                 , Arguments.of(List.of("# word"), List.of("1 word"))
                 , Arguments.of(List.of("# wordone", "# wordtwo"), List.of("1 wordone", "2 wordtwo"))
                 , Arguments.of(List.of("# wordone", "## wordtwo"), List.of("1 wordone", "1.1 wordtwo"))
+                , Arguments.of(List.of(
+                                "# wordone",
+                                "## wordtwo",
+                                "# wordthree",
+                                "## wordfour",
+                                "## wordfive",
+                                "### wordsix",
+                                "### wordseven",
+                                "# wordeight",
+                                "## wordnine",
+                                "### wordten",
+                                "## wordeleven"),
+                        List.of(
+                                "1 wordone",
+                                "1.1 wordtwo",
+                                "2 wordthree",
+                                "2.1 wordfour",
+                                "2.2 wordfive",
+                                "2.2.1 wordsix",
+                                "2.2.2 wordseven",
+                                "3 wordeight",
+                                "3.1 wordnine",
+                                "3.1.1 wordten",
+                                "3.2 wordeleven"))
         );
     }
 

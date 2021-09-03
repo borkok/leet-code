@@ -1,12 +1,11 @@
-/*
- * Copyright (c) 2021. BEST S.A. and/or its affiliates. All rights reserved.
- */
 package orderedList;
 
 public class Counter {
-    private int counter = 1;
+    private int counter1 = 0;
+    private int counter2 = 0;
 
-    String getNextNumber() {
-        return String.valueOf(counter++);
+    String getNextNumber(int i) {
+        if (i == 2)  return String.valueOf(counter1) + "." + String.valueOf(++counter2);
+        return String.valueOf(++counter1);
     }
 }

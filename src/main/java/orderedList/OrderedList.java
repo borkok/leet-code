@@ -1,6 +1,3 @@
-/*
- * Copyright (c) 2021. BEST S.A. and/or its affiliates. All rights reserved.
- */
 package orderedList;
 
 import java.util.List;
@@ -34,7 +31,11 @@ public class OrderedList {
         Counter counter = new Counter();
         return lines.stream()
                 .filter(s -> s.startsWith("#"))
-                .map(s -> s.replaceAll("#+", counter.getNextNumber()))
+                .map(s -> s.replaceAll("#+", counter.getNextNumber(hashCount(s))))
                 .collect(Collectors.toList());
+    }
+
+    private int hashCount(String s) {
+        return s.lastIndexOf("#") + 1;
     }
 }

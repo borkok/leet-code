@@ -17,6 +17,7 @@ class OrderedListTest {
         return Stream.of(
                 Arguments.of(List.of("word"), List.of())
                 , Arguments.of(List.of("# word"), List.of("1 word"))
+                , Arguments.of(List.of("# wordone", "# wordtwo"), List.of("1 wordone", "2 wordtwo"))
         );
     }
 

@@ -30,16 +30,11 @@ replace hash sign with correct chapter number meaning, ignoring lines without ha
 3.1.2 wordten
  */
 public class OrderedList {
-    private int counter = 1;
-
     public List<String> format(List<String> lines) {
+        Counter counter = new Counter();
         return lines.stream()
                 .filter(s -> s.startsWith("#"))
-                .map(s -> s.replaceAll("#+", getNextNumber()))
+                .map(s -> s.replaceAll("#+", counter.getNextNumber()))
                 .collect(Collectors.toList());
-    }
-
-    private String getNextNumber() {
-        return String.valueOf(counter++);
     }
 }

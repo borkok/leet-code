@@ -10,18 +10,18 @@ public class Counter {
     private int counter2 = 0;
 
     String nextNumber(int level) {
-        trimRight(level);
-        increaseCounter(level);
-        return concatWithDot();
+        trimSmallerLevelsThan(level);
+        increaseCounterAt(level);
+        return concatAllLevelsWithDot();
     }
 
-    private void trimRight(int newSize) {
-        for (int index = counters.size()-1; index > newSize-1; index--) {
+    private void trimSmallerLevelsThan(int maxLevel) {
+        for (int index = counters.size()-1; index > maxLevel-1; index--) {
             counters.remove(index);
         }
     }
 
-    private void increaseCounter(int level) {
+    private void increaseCounterAt(int level) {
         if (counters.size() < level) {
             while (counters.size() < level) {
                 counters.add(1);
@@ -32,7 +32,7 @@ public class Counter {
         }
     }
 
-    String concatWithDot() {
+    String concatAllLevelsWithDot() {
         return counters.stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining("."));

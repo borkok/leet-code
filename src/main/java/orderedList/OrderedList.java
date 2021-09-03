@@ -31,11 +31,11 @@ public class OrderedList {
         Counter counter = new Counter();
         return lines.stream()
                 .filter(s -> s.startsWith("#"))
-                .map(s -> s.replaceAll("#+", counter.getNextNumber(hashCount(s))))
+                .map(s -> s.replaceAll("#+", counter.nextNumber(level(s))))
                 .collect(Collectors.toList());
     }
 
-    private int hashCount(String s) {
+    private int level(String s) {
         return s.lastIndexOf("#") + 1;
     }
 }

@@ -9,7 +9,7 @@ public class Counter {
     private int counter1 = 0;
     private int counter2 = 0;
 
-    String getNextNumber(int level) {
+    String nextNumber(int level) {
         trimRight(level);
         increaseCounter(level);
         return concatWithDot();

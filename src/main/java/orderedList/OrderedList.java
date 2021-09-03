@@ -4,6 +4,7 @@
 package orderedList;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /*
 Given sequence of strings
@@ -30,6 +31,9 @@ replace hash sign with correct chapter number meaning, ignoring lines without ha
  */
 public class OrderedList {
     public List<String> format(List<String> lines) {
-        return List.of();
+        return lines.stream()
+                .filter(s -> s.startsWith("#"))
+                .map(s -> s.replace("#", "1"))
+                .collect(Collectors.toList());
     }
 }

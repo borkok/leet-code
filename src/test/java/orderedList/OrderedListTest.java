@@ -16,6 +16,7 @@ class OrderedListTest {
     private static Stream<Arguments> params() {
         return Stream.of(
                 Arguments.of(List.of("word"), List.of())
+                , Arguments.of(List.of("# word"), List.of("1 word"))
         );
     }
 
